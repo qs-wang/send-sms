@@ -1,8 +1,4 @@
-import dotenv from 'dotenv';
-
-dotenv.load({
-  path: '.env',
-});
+import _ from './env.js'; //eslint-disable-line no-unused-vars
 
 const config = {
   app: {

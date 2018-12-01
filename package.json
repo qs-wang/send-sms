@@ -4,7 +4,8 @@
   "description": "A complete boilerplate for Express.js development including unit test and code coverage.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest",
+    "alltest": "jest",
+    "test": "jest --config ./jest.unit.config.js",
     "coverage": "jest --coverage",
     "build": "rm -rf dist && webpack --mode development --config webpack.server.config.js ",
     "start": "node ./dist/server.js",
@@ -21,6 +22,7 @@
     "url": "https://github.com/qs-wang/express-es6-starter.git"
   },
   "dependencies": {
+    "anchorme": "^1.1.2",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "cors": "^2.8.5",
