@@ -1,0 +1,68 @@
+{
+  "name": "express-es6-starter",
+  "version": "2.0.0",
+  "description": "A complete boilerplate for Express.js development including unit test and code coverage.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "build": "rm -rf dist && webpack --mode development --config webpack.server.config.js ",
+    "start": "node ./dist/server.js",
+    "lint": "eslint test/** src/**"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "author": "Q.S. Wang <wangqs_eclipse@yahoo.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qs-wang/express-es6-starter.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "requestretry": "^3.1.0",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.0",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
+    "kexec": "^3.0.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "pre-commit": "^1.2.2",
+    "regenerator-runtime": "^0.13.1",
+    "style-loader": "^0.23.1",
+    "supertest": "^3.3.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
