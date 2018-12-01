@@ -1,13 +1,13 @@
 
 import request from 'requestretry';
-import {InternalError} from '../errors/errors';
+import {InternalError, OperationalError} from '../errors/errors';
 import {getLogger} from '../utils/loggerfactory';
 
 const logger = getLogger('bitly.js');
 
 const bitlyAPIRoot = 'https://api-ssl.bitly.com/v3/shorten';
 
-// stic with json format for now
+// hard code json format for now
 // https://dev.bitly.com/links.html
 const getsShortenAPI = (url, login, apiKey) => {
   return `${bitlyAPIRoot}?login=${login}&apiKey=${apiKey}&longUrl=${url}&format=json`;
@@ -28,7 +28,7 @@ export const shortURL = async (url, login, apiKey) =>{
       return resultBody.data.url;
     }
     logger.info(`bitly return failed result ${JSON.stringify(resultBody, null, 4)}`);
-    throw new InternalError(`Failed to shorten the URL ${url}`);
+    throw new OperationalError(`Failed to shorten the URL ${url}`,resultBody.status_code);
   }
 
   logger.info(`bitly backedn failed ${result.statusCode}`);

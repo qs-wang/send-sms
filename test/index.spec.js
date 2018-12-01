@@ -6,4 +6,14 @@ describe('Express Server', () => {
     const response = await request(app).get('/');
     expect(response.statusCode).toBe(200);
   });
+
+  test('It should response error the GET method to /abc', async () => {
+    const response = await request(app).get('/abc');
+    expect(response.statusCode).toBe(501);
+  });
+
+  test('It should response error the GET method to /sms', async () => {
+    const response = await request(app).post('/sms');
+    expect(response.statusCode).toBe(400);
+  });
 });

@@ -7,6 +7,7 @@ import { getLogger } from './utils/loggerfactory';
 import routes from './routes';
 import { createResponse } from './utils/response';
 import config from './config';
+import {OperationalError} from './errors/errors';
 
 const logger = getLogger('app');
 
@@ -52,10 +53,14 @@ app.use('/v1/', routes.v1);
 app.use((req, res) => {
   createResponse(res, 501, `${req.method} method of path ${req.url} is not supported yet`);
 });
-app.use((err, _, res) => {
+app.use((err, req, res, next) => { //eslint-disable-line no-unused-vars
   logger.error(err.stack);
-  // TODO: treat different type errors
-  createResponse(res, 500, 'Something broke! Please raise a ticket');
+  if( err instanceof OperationalError){
+    createResponse(res, err.code, err.message);
+  }else{
+    createResponse(res, 500, 'Something broke! Please raise a ticket');
+  }
+ 
 });
 
 export default app;

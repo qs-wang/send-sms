@@ -1,4 +1,3 @@
-
 /**
  * This class is for helping run the bitly restapi, and analyse the return format
  * This should not run as the auto test suit.
@@ -7,6 +6,8 @@
 import _ from '../../src/env'; //eslint-disable-line no-unused-vars
 import request from 'requestretry';
 import { getLogger } from '../../src/utils/loggerfactory';
+import {shortURL} from '../../src/utils/bitly';
+import {OperationalError} from '../../src/errors/errors';
 
 const logger = getLogger('bitly.spec.js');
 
@@ -18,12 +19,6 @@ describe('bitly Api', () => {
   beforeEach(()=> {
     shorttenAPI = `${bitlyAPIRoot}?login=${process.env.BITLY_LOGIN}&apiKey=${process.env.BITLY_API_KEY}&format=json`;
   });
-  // test('It should encode the url', () => {
-  //   const url = 'http://example.com/page?parameter=value#anchor';
-
-  //   const result = encodeURIComponent(url);
-  //   expect(result).toBe('http%3A%2F%2Fexample.com%2Fpage%3Fparameter%3Dvalue%23anchor');
-  // });
 
   test('It should shorten the IP', async () => {
     const url = 'http://192.168.3.3';
@@ -80,5 +75,15 @@ describe('bitly Api', () => {
 
     expect(result.statusCode).toBe(200);
     logger.info(`The body is ${JSON.stringify(result.body, null, 4)}`);
+  });
+
+  test('It should throw the error while failed to shorten the url', async () => {
+    try {
+      await shortURL('http:/www.eclipse.org/birt/about', process.env.BITLY_LOGIN, process.env.BITLY_API_KEY);
+      fail(); //eslint-disable-line no-undef
+    } catch (error) {
+      expect(error instanceof OperationalError).toBeTruthy();
+    }
+    
   });
 });
