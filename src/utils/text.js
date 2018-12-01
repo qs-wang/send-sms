@@ -45,6 +45,9 @@ export const findURLs = (text) => {
       },
     ]
  */
+// FIXME: open issue, seems the replacement for www.google.com/about/ has problem
+// so far cannot have the '/' at the end
+// the issue is actually at get side, the detect url lib return www.google.com/about as raw url
 export const replaceURLs = (text, urlObjects) => {
   urlObjects.forEach(element => {
     text = replaceInText(text, element.raw, element.url);

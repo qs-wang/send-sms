@@ -14,8 +14,9 @@ export class InternalError extends ServerError {
 }
 
 export class OperationalError extends ServerError {
-  constructor(message) {
+  constructor(message, code) {
     super(message);
+    this.code = code;
   }
 }
 

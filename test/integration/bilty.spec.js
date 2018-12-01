@@ -16,7 +16,7 @@ describe('bitly Api', () => {
   let shorttenAPI;
 
   beforeEach(()=> {
-    shorttenAPI = `${bitlyAPIRoot}?login=${process.env.BITLY_LOGIN}&apiKey=BITLY_API_KEY&format=json`;
+    shorttenAPI = `${bitlyAPIRoot}?login=${process.env.BITLY_LOGIN}&apiKey=${process.env.BITLY_API_KEY}&format=json`;
   });
   // test('It should encode the url', () => {
   //   const url = 'http://example.com/page?parameter=value#anchor';

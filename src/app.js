@@ -54,6 +54,7 @@ app.use((req, res) => {
 });
 app.use((err, _, res) => {
   logger.error(err.stack);
+  // TODO: treat different type errors
   createResponse(res, 500, 'Something broke! Please raise a ticket');
 });
 

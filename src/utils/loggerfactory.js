@@ -10,7 +10,7 @@ export const getLogger = function (name) {
     format: combine(label({ label: name }), timestamp(), localFormat),
     transports: [
       new transports.Console({
-        level: process.env.SEND_SMS_LOGLEVEL | 'info'
+        level: process.env.SEND_SMS_LOGLEVEL || 'info'
       })
     ]
   });
