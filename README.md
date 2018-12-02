@@ -97,3 +97,10 @@ For example for run the /sms api you can run
 export BURST_TEST_PHONE=123456
 npx jest test/integration/index.spec.js
 ```
+
+## Known issues
+1. So far if the url end with '/', e.g. http://www.example.com/exam/, the shorten url is not working all right. This is caused by the url deteact lib I am using, and will need find a solution later on.
+
+2. The message body cannot contain certain characters, e.g. (), ',!, *. For this case the 3rd party SMS api failed to send it, haven't had to time understand why
+
+3. More tests will be needed.
