@@ -17,7 +17,11 @@ export const sendSMSs = async (phone, messages) => {
   });
 
   return Promise.all(sendPromises
-    .map(p => p.catch(e => e)));
+    .map(p => p.catch(e => {
+      return {
+        statusCode: e.code || 500
+      };
+    })));
 };
 
 export const sendSMS = async (phone, message) => {

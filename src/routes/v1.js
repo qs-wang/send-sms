@@ -44,18 +44,22 @@ router
       }
       try {
         const result = await sendSMSs(phone, messages);
-        let returnMsg = '';
-        if(Array.isArray(result)){
-          const retureArray = result.map(element => {
-            if (element instanceof Error){
-              return 'Delivery Failed';
-            }else{
+        let retureArray;
+        if (Array.isArray(result)) {
+          retureArray = result.map(element => {
+            if (element.statusCode === 200) {
               return 'Delived';
+            } else {
+              if(element.statusCode){
+                return 'Delivery failed';
+              }else{
+                return 'Unknown';
+              }
             }
           });
-          returnMsg = JSON.stringify(retureArray);
+          // returnMsg = JSON.stringify(retureArray);
         }
-        createResponse(res, 200, null, `SMS delivery status ${JSON.stringify(returnMsg, null, 4)}`);
+        createResponse(res, 200, null, 'SMS delivery status', retureArray);
       } catch (error) {
         Promise.resolve().then(() => {
           throw error;
