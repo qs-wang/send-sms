@@ -1,6 +1,6 @@
 import {sendSMS, sendSMSs} from '../../src/sms/sms';
 
-describe('sms Api', () => {
+describe('sms API integration test', () => {
   it('should send the sms with multiple urls', async ()=>{
     await sendSMS(process.env.BURST_TEST_PHONE, 
       'Hi, good deal at eclipse.org/birt, and http://www.eclipse.org/birt/about'

@@ -17,8 +17,8 @@ export const shortURL = async (url, login, apiKey) =>{
   const result = await request.get(
     getsShortenAPI(url,login,apiKey),{
       json: true,
-      maxAttempts: 5,  
-      retryDelay: 5000, 
+      maxAttempts: 2,
+      retryDelay: 1000,
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
     });
 

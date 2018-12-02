@@ -2,7 +2,7 @@ import app from './app';
 import {getLogger} from './utils/loggerfactory';
 import chalk from 'chalk';
 
-const logger = getLogger('server');
+const logger = getLogger('server.js');
 
 app.listen(app.get('port'), () => {
   logger.info(`${chalk.green('✓')} App is listening at ${app.get('baseUrl')}`);

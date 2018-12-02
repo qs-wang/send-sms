@@ -60,7 +60,6 @@ export const sendSMS = async (phone, message) => {
 };
 
 const burstAPI = 'https://api.transmitsms.com/send-sms.json';
-
 export const sendSMSViaBurst = async (phone, message) => {
   logger.info('Sending SMS via burst api');
   const messageData = querystring.stringify({
@@ -80,12 +79,10 @@ export const sendSMSViaBurst = async (phone, message) => {
       user: config.app.burstAPIKey,
       pass: config.app.burstAPISecret
     },
-    maxAttempts: 5,
-    retryDelay: 5000,
+    maxAttempts: 2,
+    retryDelay: 1000,
     retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
   });
-
-
 
   if (result.statusCode != 200) {
     if (result.statusCode == 500) {
@@ -99,5 +96,5 @@ export const sendSMSViaBurst = async (phone, message) => {
     }
   }
 
-  return {'code':'SUCCESS','description':'OK'};
+  return result;
 };

@@ -11,23 +11,14 @@ import {OperationalError} from './errors/errors';
 
 const logger = getLogger('app');
 
-/**
- * Create the express app
- */
+// Create the express app
 const app = express();
 
-/**
- * Configure application
- */
+// Configure application
 app.set('port', config.app.port);
 app.set('baseUrl', config.app.baseUrl);
 
-// TODO:
-// compression?
-
-/**
- * Set up middlewares
- */
+// Set up middlewares
 app.use(loggerMiddleware(':method :url :status :res[content-length] - :response-time ms'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -35,21 +26,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(expressValidator());
 
-/**
- *  Cors enable
- */
-// TODO: Later implement route specific CORS or dynamic origin. Now allowed for all origin
+// Cors enable
+// TODO: Specific CORS or dynamic origin. 
+// Now allowed for all origin
 app.use(cors());
 
-/**
- * Set up versioning and routes
- */
+// Set up versioning and routes
 app.use('/', routes.v1);
 app.use('/v1/', routes.v1);
 
-/**
- * App wide handlers for unsupported and error
- */
+// App wide handlers for unsupported and error
 app.use((req, res) => {
   createResponse(res, 501, `${req.method} method of path ${req.url} is not supported yet`);
 });

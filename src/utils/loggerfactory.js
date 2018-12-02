@@ -11,6 +11,10 @@ export const getLogger = function (name) {
     transports: [
       new transports.Console({
         level: process.env.SEND_SMS_LOGLEVEL || 'info'
+      }),
+      new (transports.File)({
+        filename: 'send-sms.log',
+        level: process.env.SEND_SMS_LOGLEVEL || 'info'
       })
     ]
   });

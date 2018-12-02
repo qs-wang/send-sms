@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../../src/app';
 
-describe('Express Server', () => {
+describe('Express Server integration tests', () => {
   test('It should send multiple messages with POST to /sms', async () => {
     await request(app)
       .post('/sms')

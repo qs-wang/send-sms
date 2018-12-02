@@ -6,7 +6,6 @@ import { sendSMSs } from '../sms/sms';
 const router = new express.Router();
 
 router.get('/', (req, res) => {
-  //TODO: provide a list of apis,or forbid?
   res.status(200).send('Send SMS API, version 1');
 });
 
@@ -15,7 +14,6 @@ router
   .post(async (req, res, next) => {
     if (req.is('*/json')) {
       const body = req.body;
-
       if (!body.to) {
         Promise.resolve().then(() => {
           throw new OperationalError('Phone number is empty', 422);
@@ -46,7 +44,18 @@ router
       }
       try {
         const result = await sendSMSs(phone, messages);
-        createResponse(res, 200, null, `SMS delivery status ${JSON.stringify(result, null, 4)}`);
+        let returnMsg = '';
+        if(Array.isArray(result)){
+          const retureArray = result.map(element => {
+            if (element instanceof Error){
+              return 'Delivery Failed';
+            }else{
+              return 'Delived';
+            }
+          });
+          returnMsg = JSON.stringify(retureArray);
+        }
+        createResponse(res, 200, null, `SMS delivery status ${JSON.stringify(returnMsg, null, 4)}`);
       } catch (error) {
         Promise.resolve().then(() => {
           throw error;

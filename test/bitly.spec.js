@@ -5,10 +5,9 @@ import { InternalError, OperationalError } from '../src/errors/errors';
 describe('bitly api', () => {
 
   it('should return the shorten url', async () => {
-    const addMock = jest.spyOn(request, 'get');
-
+    const getMock = jest.spyOn(request, 'get');
     // override the implementation
-    addMock.mockImplementation(() =>  {
+    getMock.mockImplementation(() =>  {
       return {
         statusCode: 200,
         body: {
@@ -26,10 +25,10 @@ describe('bitly api', () => {
   });
 
   it('should throw error from bilty api', async () => {
-    const addMock = jest.spyOn(request, 'get');
+    const getMock = jest.spyOn(request, 'get');
 
     // override the implementation
-    addMock.mockImplementation(() =>  {
+    getMock.mockImplementation(() =>  {
       return {
         statusCode: 200,
         body: {

@@ -12,15 +12,15 @@ describe('sms api', () => {
     });
 
 
-    const sendViaBurstMock = jest.spyOn(request, 'post');
+    const postMock = jest.spyOn(request, 'post');
     // override the implementation
-    sendViaBurstMock.mockImplementation( async () =>  {
+    postMock.mockImplementation( async () =>  {
       return Promise.resolve({
         statusCode: 200
       });
     });
     const result = await sms.sendSMS('123456', 'Hi http://example.com');
-    expect(result).toEqual({'code':'SUCCESS','description':'OK'});
+    expect(result).toEqual({'statusCode': 200});
   });
 
   it('should throw 500 error', async () => {

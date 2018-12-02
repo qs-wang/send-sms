@@ -1,14 +1,15 @@
 {
-  "name": "express-es6-starter",
-  "version": "2.0.0",
-  "description": "A complete boilerplate for Express.js development including unit test and code coverage.",
-  "main": "lib/index.js",
+  "name": "send-sms",
+  "version": "1.0.0",
+  "description": "A simple REST API server for sending SMS to phone.",
+  "main": "dist/server.js",
   "scripts": {
     "alltest": "jest",
     "test": "jest --config ./jest.unit.config.js",
     "coverage": "jest --coverage",
     "build": "rm -rf dist && webpack --mode development --config webpack.server.config.js ",
     "start": "node ./dist/server.js",
+    "start:dev": "npm run build && node ./dist/server.js",
     "lint": "eslint test/** src/**"
   },
   "pre-commit": [

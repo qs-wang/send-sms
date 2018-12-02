@@ -9,11 +9,11 @@ import { getLogger } from '../../src/utils/loggerfactory';
 import {shortURL} from '../../src/utils/bitly';
 import {OperationalError} from '../../src/errors/errors';
 
-const logger = getLogger('bitly.spec.js');
+const logger = getLogger('integration/bitly.spec.js');
 
 const bitlyAPIRoot = 'https://api-ssl.bitly.com/v3/shorten';
 
-describe('bitly Api', () => {
+describe('bitly API integration test', () => {
   let shorttenAPI;
 
   beforeEach(()=> {
@@ -24,8 +24,8 @@ describe('bitly Api', () => {
     const url = 'http://192.168.3.3';
     const result =  await request.get(`${shorttenAPI}&longUrl=${encodeURIComponent(url)}`, {
       json: true,
-      maxAttempts: 5,
-      retryDelay: 5000,
+      maxAttempts: 2,
+      retryDelay: 1000,
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
     });
 
@@ -38,8 +38,8 @@ describe('bitly Api', () => {
     
     const result = await request.get(`${shorttenAPI}&longUrl=${encodeURIComponent(url)}`, {
       json: true,
-      maxAttempts: 5,
-      retryDelay: 5000,
+      maxAttempts: 2,
+      retryDelay: 1000,
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
     });
 
@@ -53,8 +53,8 @@ describe('bitly Api', () => {
 
     const result = await request.get(`${shorttenAPI}&longUrl=${encodeURIComponent(url)}`, {
       json: true,
-      maxAttempts: 5,
-      retryDelay: 5000,
+      maxAttempts: 2,
+      retryDelay: 1000,
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
     });
 
@@ -68,8 +68,8 @@ describe('bitly Api', () => {
 
     const result = await request.get(`${shorttenAPI}&longUrl=${encodeURIComponent(url)}`, {
       json: true,
-      maxAttempts: 5,
-      retryDelay: 5000,
+      maxAttempts: 2,
+      retryDelay: 1000,
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError // (default) retry on 5xx or network errors
     });
 
